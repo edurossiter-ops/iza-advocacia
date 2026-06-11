@@ -41,6 +41,8 @@
     var markField = function (input, bad) {
       var field = input.closest(".field");
       if (field) field.classList.toggle("invalid", bad);
+      if (bad) input.setAttribute("aria-invalid", "true");
+      else input.removeAttribute("aria-invalid");
     };
     form.addEventListener("submit", function (e) {
       e.preventDefault();

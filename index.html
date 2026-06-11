@@ -98,17 +98,14 @@
             </a>
             <a class="btn btn-ghost btn-lg" href="#areas">Conhecer as áreas</a>
           </div>
-          <ul class="hero-trust" data-reveal data-reveal-delay="4">
-            <li>16 anos de advocacia</li>
-            <li>OAB/BA 35.679</li>
-            <li>Atendimento 100% remoto</li>
-            <li>Português e Alemão</li>
-          </ul>
         </div>
 
         <figure class="hero-figure" data-reveal data-reveal-delay="2">
           <div class="hero-figure__frame">
-            <img src="assets/iza-rossiter-advogada.jpeg" width="430" height="538" alt="Iza Rossiter, advogada, em traje sóbrio diante de fundo claro." fetchpriority="high" />
+            <picture>
+              <source srcset="assets/iza-rossiter-advogada.webp" type="image/webp" />
+              <img src="assets/iza-rossiter-advogada.jpeg" width="430" height="538" alt="Iza Rossiter, advogada, em traje sóbrio diante de fundo claro." fetchpriority="high" />
+            </picture>
             <span class="hero-figure__rule" aria-hidden="true"></span>
           </div>
           <div class="hero-figure__badge" aria-hidden="true">
@@ -116,6 +113,18 @@
             <span>anos protegendo o essencial da vida</span>
           </div>
         </figure>
+      </div>
+    </section>
+
+    <!-- ===================== Faixa de credenciais ===================== -->
+    <section class="trust-strip" aria-label="Credenciais">
+      <div class="container">
+        <ul class="trust-list" data-reveal>
+          <li>16 anos de advocacia</li>
+          <li>OAB/BA 35.679</li>
+          <li>Atendimento 100% remoto</li>
+          <li>Português e Alemão</li>
+        </ul>
       </div>
     </section>
 
@@ -142,7 +151,6 @@
 
         <div class="areas-grid">
           <article class="area-card" data-reveal>
-            <span class="area-card__num">01</span>
             <h3>Direito Internacional de Família</h3>
             <p class="area-card__lead">Para famílias multinacionais e vínculos que atravessam fronteiras, quando o direito de um país precisa conversar com o de outro.</p>
             <ul class="area-card__list">
@@ -157,7 +165,6 @@
           </article>
 
           <article class="area-card" data-reveal data-reveal-delay="1">
-            <span class="area-card__num">02</span>
             <h3>Direito Médico e da Saúde</h3>
             <p class="area-card__lead">Para pacientes diante de barreiras de saúde, quando uma negativa coloca um tratamento, e às vezes a vida, em espera.</p>
             <ul class="area-card__list">
@@ -177,7 +184,7 @@
     <!-- ===================== Manifesto ===================== -->
     <section class="section manifesto" aria-label="O essencial da vida">
       <div class="container">
-        <blockquote>
+        <blockquote data-reveal>
           <p class="q">Atrás de cada processo existe uma história humana. E, quase sempre, <b>o essencial da vida</b> em jogo: uma família, uma saúde.</p>
           <p class="attr">Iza Rossiter</p>
         </blockquote>
@@ -188,8 +195,10 @@
     <section class="section section--white" id="sobre" aria-labelledby="sobre-title">
       <div class="container sobre-grid">
         <figure class="sobre-figure" data-reveal>
-          <img src="assets/iza-rossiter-advogada-sobre.jpeg" width="500" height="625" alt="Iza Rossiter, advogada, de braços cruzados em um escritório iluminado." loading="lazy" />
-          <span class="sobre-figure__tag" aria-hidden="true">técnica + humano</span>
+          <picture>
+            <source srcset="assets/iza-rossiter-advogada-sobre.webp" type="image/webp" />
+            <img src="assets/iza-rossiter-advogada-sobre.jpeg" width="500" height="625" alt="Iza Rossiter, advogada, de braços cruzados em um escritório iluminado." loading="lazy" />
+          </picture>
         </figure>
 
         <div class="sobre-body" data-reveal data-reveal-delay="1">
@@ -256,7 +265,7 @@
       <div class="container">
         <div class="section-head" data-reveal>
           <h2 id="blog-title">As dúvidas reais de quem vive entre países, em linguagem clara.</h2>
-          <p>Os primeiros temas estão em preparação. Enquanto isso, o conteúdo nasce primeiro no Instagram. Acompanhe em <a class="ulink" href="https://instagram.com/izarossiter" target="_blank" rel="noopener">@izarossiter</a>.</p>
+          <p>Os artigos estão a caminho. Por enquanto, acompanho essas dúvidas de perto no Instagram, em <a class="ulink" href="https://instagram.com/izarossiter" target="_blank" rel="noopener">@izarossiter</a>.</p>
         </div>
 
         <ul class="blog-grid">
@@ -320,19 +329,22 @@
               </li>
             </ul>
             <figure class="contato-figure">
-              <img src="assets/iza-rossiter-advogada-contato.jpeg" width="430" height="538" alt="Iza Rossiter, advogada, com expressão acolhedora." loading="lazy" />
+              <picture>
+                <source srcset="assets/iza-rossiter-advogada-contato.webp" type="image/webp" />
+                <img src="assets/iza-rossiter-advogada-contato.jpeg" width="430" height="538" alt="Iza Rossiter, advogada, com expressão acolhedora." loading="lazy" />
+              </picture>
             </figure>
           </div>
 
           <form class="contato-form" id="contatoForm" data-reveal data-reveal-delay="1" novalidate>
             <div class="field">
               <label for="cf-nome">Nome</label>
-              <input id="cf-nome" name="nome" type="text" autocomplete="name" required />
+              <input id="cf-nome" name="nome" type="text" autocomplete="name" aria-describedby="formNote" required />
             </div>
             <div class="field-row">
               <div class="field">
                 <label for="cf-email">E-mail</label>
-                <input id="cf-email" name="email" type="email" autocomplete="email" spellcheck="false" autocapitalize="off" required />
+                <input id="cf-email" name="email" type="email" autocomplete="email" spellcheck="false" autocapitalize="off" aria-describedby="formNote" required />
               </div>
               <div class="field">
                 <label for="cf-tel">WhatsApp <span class="opt">(opcional)</span></label>
@@ -349,7 +361,7 @@
             </div>
             <div class="field">
               <label for="cf-msg">Como posso ajudar?</label>
-              <textarea id="cf-msg" name="mensagem" rows="4" required></textarea>
+              <textarea id="cf-msg" name="mensagem" rows="4" aria-describedby="formNote" required></textarea>
             </div>
             <button class="btn btn-gold btn-lg" type="submit">Enviar mensagem</button>
             <p class="form-note" id="formNote" role="status" aria-live="polite">Sua mensagem abre no seu aplicativo de e-mail, já endereçada para a Iza. Prefere agora? <a class="ulink" href="https://wa.me/4915750995941" target="_blank" rel="noopener">Fale pelo WhatsApp</a>.</p>

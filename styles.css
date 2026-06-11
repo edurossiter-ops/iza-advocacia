@@ -210,6 +210,13 @@ p { text-wrap: pretty; }
   -webkit-backdrop-filter: saturate(140%) blur(14px);
   border-bottom-color: var(--line);
 }
+/* Emil: gold hairline draws across the header once scrolled */
+.site-header::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
+  background: var(--gold-grad); transform: scaleX(0); transform-origin: center;
+  transition: transform 600ms var(--ease-out); opacity: 0.85;
+}
+.site-header.scrolled::after { transform: scaleX(1); }
 .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; height: 76px; }
 
 .brand { display: inline-flex; align-items: center; gap: 0.7rem; text-decoration: none; }
@@ -244,14 +251,18 @@ p { text-wrap: pretty; }
 .hero-copy { max-width: 38rem; }
 .hero-label { margin-bottom: 1.6rem; }
 .hero h1 {
-  font-size: var(--fs-display); font-weight: 600; letter-spacing: -0.01em; line-height: 1.04;
+  font-size: var(--fs-display); font-weight: 600; letter-spacing: -0.01em; line-height: 1.1;
+  padding-bottom: 0.08em;
 }
 .hero h1 em { font-style: italic; color: var(--gold-dark); }
 .hero-lead { margin-top: 1.6rem; font-size: var(--fs-lead); line-height: 1.6; color: var(--ink-soft); max-width: 33rem; }
 .hero-actions { margin-top: 2.4rem; display: flex; flex-wrap: wrap; gap: 0.9rem; }
-.hero-trust { margin-top: 2.6rem; padding-top: 1.5rem; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 0.5rem 1.4rem; }
-.hero-trust li { list-style: none; font-size: var(--fs-small); color: var(--text-muted); display: flex; align-items: center; gap: 0.55rem; }
-.hero-trust li::before { content:""; width: 5px; height: 5px; border-radius: 50%; background: var(--gold-dark); flex: none; }
+/* Faixa de credenciais — logo abaixo do hero (movida do hero por T3) */
+.trust-strip { background: var(--paper); border-bottom: 1px solid var(--line); }
+.trust-strip .container { padding-block: clamp(1.1rem, 0.8rem + 1vw, 1.6rem); }
+.trust-list { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem 2rem; }
+.trust-list li { font-size: var(--fs-small); color: var(--text-muted); display: flex; align-items: center; gap: 0.6rem; font-weight: 500; }
+.trust-list li:not(:first-child)::before { content: ""; width: 4px; height: 4px; border-radius: 50%; background: var(--gold-mid); flex: none; margin-left: -1.15rem; }
 
 .hero-figure { position: relative; justify-self: center; }
 .hero-figure__frame { position: relative; width: min(100%, 430px); aspect-ratio: 4/5; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-card); }
@@ -284,8 +295,7 @@ p { text-wrap: pretty; }
 .area-card::after { content:""; position:absolute; left:0; top:0; right:0; height: 3px; background: var(--gold-grad); transform: scaleX(0); transform-origin: left; transition: transform var(--dur-3) var(--ease-out); }
 .area-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); border-color: transparent; }
 .area-card:hover::after { transform: scaleX(1); }
-.area-card__num { font-family: var(--font-display); font-size: 1rem; color: var(--gold-ink); letter-spacing: 0.05em; }
-.area-card h3 { font-size: var(--fs-h3); margin: 0.7rem 0 1rem; }
+.area-card h3 { font-size: var(--fs-h3); margin: 0 0 1rem; }
 .area-card__lead { color: var(--ink-soft); }
 .area-card__list { list-style: none; margin-top: 1.4rem; display: grid; gap: 0.7rem; }
 .area-card__list li { position: relative; padding-left: 1.6rem; font-size: 0.97rem; color: var(--text); }
@@ -320,7 +330,6 @@ p { text-wrap: pretty; }
 .sobre-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(2rem, 5vw, 5rem); align-items: start; }
 .sobre-figure { position: relative; position: sticky; top: 110px; }
 .sobre-figure img { width: 100%; border-radius: var(--radius-lg); box-shadow: var(--shadow-card); object-fit: cover; aspect-ratio: 4/5; object-position: 50% 20%; }
-.sobre-figure__tag { position: absolute; right: -16px; top: 28px; writing-mode: vertical-rl; font-family: var(--font-display); font-style: italic; font-size: 1rem; color: var(--gold-dark); letter-spacing: 0.04em; }
 .sobre-body h2 { font-size: var(--fs-h2); margin-top: 1.1rem; }
 .sobre-body .lead { font-size: var(--fs-lead); color: var(--ink-soft); margin-top: 1.4rem; }
 .sobre-body p + p { margin-top: 1.15rem; }
@@ -386,8 +395,21 @@ p { text-wrap: pretty; }
    Reveal (motion base — refinado depois por Taste/Emil)
    ========================================================================= */
 /* Hidden state só quando JS está ativo — sem JS / crawlers veem tudo (SEO + a11y) */
-.js [data-reveal] { opacity: 0; transform: translateY(22px); transition: opacity var(--dur-3) var(--ease-out), transform var(--dur-3) var(--ease-out); }
-.js [data-reveal].is-in { opacity: 1; transform: none; }
+.js [data-reveal] { opacity: 0; transform: translateY(20px); filter: blur(8px); transition: opacity var(--dur-3) var(--ease-out), transform var(--dur-3) var(--ease-out), filter var(--dur-3) var(--ease-out); }
+.js [data-reveal].is-in { opacity: 1; transform: none; filter: none; }
+
+/* Emil: portrait "curtain" reveal — the image rises into frame (clip-path + settle).
+   Figures keep opacity from data-reveal but their motion is carried by the clip-path. */
+.js .hero-figure, .js .sobre-figure { transform: none; filter: none; }
+.js .hero-figure__frame, .js .sobre-figure img, .js .contato-figure img {
+  clip-path: inset(0 0 100% 0); transform: scale(1.05);
+  transition: clip-path 1000ms var(--ease-out), transform 1200ms var(--ease-out);
+  will-change: clip-path, transform;
+}
+.js .hero-figure.is-in .hero-figure__frame,
+.js .sobre-figure.is-in img,
+.js .contato-methods.is-in .contato-figure img { clip-path: inset(0 0 0 0); transform: scale(1); }
+
 [data-reveal-delay="1"] { transition-delay: 80ms; }
 [data-reveal-delay="2"] { transition-delay: 160ms; }
 [data-reveal-delay="3"] { transition-delay: 240ms; }
@@ -396,7 +418,7 @@ p { text-wrap: pretty; }
 /* =========================================================================
    Proposta de valor (faixa)
    ========================================================================= */
-.valueprop { background: var(--paper); border-block: 1px solid var(--line); }
+.valueprop { background: var(--paper); border-bottom: 1px solid var(--line); }
 .valueprop .container { padding-block: clamp(1.4rem, 1rem + 1.5vw, 2.2rem); }
 .valueprop-list { list-style: none; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem 1.6rem; }
 .valueprop-list li { display: flex; align-items: center; gap: 0.7rem; font-size: 0.95rem; font-weight: 500; color: var(--ink); }
@@ -464,7 +486,6 @@ p { text-wrap: pretty; }
   .hero-figure__frame { width: min(100%, 360px); }
   .sobre-grid { grid-template-columns: 1fr; }
   .sobre-figure { position: relative; top: 0; max-width: 380px; }
-  .sobre-figure__tag { display: none; }
   .contato-grid { grid-template-columns: 1fr; }
   .contato-figure { max-width: 360px; }
   .footer-top { grid-template-columns: 1fr; gap: 2.4rem; }
@@ -514,5 +535,6 @@ p { text-wrap: pretty; }
    ========================================================================= */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
-  .js [data-reveal], [data-reveal] { opacity: 1 !important; transform: none !important; }
+  .js [data-reveal], [data-reveal] { opacity: 1 !important; transform: none !important; filter: none !important; }
+  .js .hero-figure__frame, .js .sobre-figure img, .js .contato-figure img { clip-path: none !important; transform: none !important; }
 }
