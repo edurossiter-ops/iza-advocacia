@@ -1,0 +1,62 @@
+/* =========================================================================
+   Artigos do blog — estilo de leitura (carregado só nas páginas de artigo).
+   Usa os tokens de styles.css (cores, fontes, espaçamento).
+   ========================================================================= */
+
+.article { padding-top: clamp(6.5rem, 5rem + 6vw, 9rem); padding-bottom: var(--space-section); }
+.article .container { max-width: 760px; }
+
+/* Cabeçalho do artigo */
+.article-back {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.9rem; font-weight: 600; color: var(--gold-ink); text-decoration: none;
+  margin-bottom: 2rem;
+}
+.article-back::before { content: ""; width: 16px; height: 1px; background: var(--gold-dark); transition: width var(--dur-2) var(--ease-out); }
+.article-back:hover::before { width: 26px; }
+
+.article-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.9rem; margin-bottom: 1.1rem; }
+.article-meta .area { font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--gold-ink); }
+.article-meta .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--gold-mid); }
+.article-meta time, .article-meta .read { font-size: 0.85rem; color: var(--text-muted); }
+
+.article-title { font-size: clamp(2rem, 1.4rem + 2.6vw, 3rem); line-height: 1.1; letter-spacing: -0.01em; }
+.article-lead { font-size: var(--fs-lead); line-height: 1.55; color: var(--ink-soft); margin-top: 1.2rem; }
+
+.article-divider { height: 1px; border: 0; background: var(--gold-hair); opacity: 0.9; margin: clamp(2rem, 4vw, 3rem) 0; }
+
+/* Corpo do artigo */
+.article-body { font-size: 1.075rem; line-height: 1.8; color: var(--text); }
+.article-body > * + * { margin-top: 1.35rem; }
+.article-body p { text-wrap: pretty; }
+.article-body h2 { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2rem); line-height: 1.15; color: var(--ink); margin-top: 2.6rem; }
+.article-body h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem; color: var(--ink); margin-top: 2rem; }
+.article-body h2 + p, .article-body h3 + p { margin-top: 0.8rem; }
+.article-body strong { font-weight: 600; color: var(--ink); }
+.article-body a { color: var(--gold-ink); text-decoration: underline; text-decoration-color: rgba(131,98,55,0.4); text-underline-offset: 3px; transition: text-decoration-color var(--dur-1) var(--ease-out); }
+.article-body a:hover { text-decoration-color: var(--gold-dark); }
+
+.article-body ul, .article-body ol { padding-left: 1.4rem; display: grid; gap: 0.6rem; }
+.article-body li { padding-left: 0.3rem; }
+.article-body ul li::marker { color: var(--gold-dark); }
+.article-body ol li::marker { color: var(--gold-dark); font-family: var(--font-display); }
+
+.article-body blockquote {
+  margin: 1.8rem 0; padding: 1.3rem 1.6rem; border-radius: var(--radius-lg);
+  background: rgba(150,118,82,0.07);
+  font-family: var(--font-display); font-style: italic; font-size: 1.2rem; line-height: 1.4; color: var(--ink);
+}
+.article-body img { width: 100%; border-radius: var(--radius-lg); margin: 1.8rem 0; box-shadow: var(--shadow-soft); }
+.article-body figure figcaption { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.6rem; text-align: center; }
+
+/* Aviso/Disclaimer no fim (caráter informativo) */
+.article-note { margin-top: 2.6rem; padding-top: 1.4rem; border-top: 1px solid var(--line); font-size: 0.88rem; color: var(--text-muted); }
+
+/* CTA ao final do artigo */
+.article-cta {
+  margin-top: clamp(2.5rem, 4vw, 3.5rem); padding: clamp(1.8rem, 3vw, 2.6rem);
+  background: var(--ink); color: #efe9df; border-radius: var(--radius-lg); text-align: center;
+}
+.article-cta h2 { font-family: var(--font-display); color: #f6f1e8; font-size: clamp(1.4rem, 1.1rem + 1.4vw, 1.9rem); line-height: 1.15; }
+.article-cta p { color: #cdc5b6; margin: 0.8rem auto 0; max-width: 46ch; }
+.article-cta .btn { margin-top: 1.6rem; }

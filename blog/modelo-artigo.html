@@ -1,0 +1,148 @@
+<!doctype html>
+<!--
+  MODELO DE ARTIGO — base para cada post do blog.
+  Para publicar um artigo de verdade:
+   1) Copie este arquivo para  /blog/<slug-do-artigo>.html
+   2) Preencha tudo que está entre {{ }}
+   3) REMOVA a linha <meta name="robots" content="noindex" /> (só o modelo é noindex)
+   4) Adicione a URL no sitemap.xml e transforme o card correspondente na home em link
+  Conteúdo jurídico = texto da Iza, validado por ela (OAB). Nada inventado.
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f3f3f3" />
+  <meta name="robots" content="noindex" />
+  <title>{{TITULO}} | Iza Rossiter Advocacia</title>
+  <meta name="description" content="{{RESUMO_ATE_160_CARACTERES}}" />
+  <link rel="canonical" href="https://izarossiter.com/blog/{{SLUG}}.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://izarossiter.com/blog/{{SLUG}}.html" />
+  <meta property="og:site_name" content="Iza Rossiter Advocacia" />
+  <meta property="og:title" content="{{TITULO}}" />
+  <meta property="og:description" content="{{RESUMO_ATE_160_CARACTERES}}" />
+  <meta property="og:image" content="https://izarossiter.com/assets/iza-rossiter-advogada-retrato.jpeg" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" type="image/png" href="../assets/monogram.png" />
+  <link rel="apple-touch-icon" href="../assets/monogram.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,500;1,6..96,600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script>document.documentElement.classList.add("js");</script>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../article.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "{{TITULO}}",
+    "description": "{{RESUMO_ATE_160_CARACTERES}}",
+    "datePublished": "{{AAAA-MM-DD}}",
+    "dateModified": "{{AAAA-MM-DD}}",
+    "inLanguage": "pt-BR",
+    "url": "https://izarossiter.com/blog/{{SLUG}}.html",
+    "image": "https://izarossiter.com/assets/iza-rossiter-advogada-retrato.jpeg",
+    "author": { "@type": "Person", "name": "Iza Rossiter", "jobTitle": "Advogada" },
+    "publisher": { "@type": "Attorney", "name": "Iza Rossiter Advocacia" },
+    "about": "{{AREA}}"
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Pular para o conteúdo</a>
+
+  <header class="site-header" id="header">
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="Iza Rossiter · Advocacia & Consultoria Jurídica">
+        <img class="brand__mono" src="../assets/monogram.png" alt="" aria-hidden="true" />
+        <span class="brand__name" translate="no">Iza Rossiter<small>Advocacia &amp; Consultoria Jurídica</small></span>
+      </a>
+      <nav class="nav" id="nav" aria-label="Navegação principal">
+        <a href="/#areas">Áreas</a>
+        <a href="/#sobre">Sobre</a>
+        <a href="/#como">Como funciona</a>
+        <a href="/#blog">Blog</a>
+        <a href="/#contato">Contato</a>
+        <a class="btn btn-gold header-cta" href="https://wa.me/4915750995941" target="_blank" rel="noopener">Agendar consulta</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-controls="nav" aria-expanded="false"><span></span></button>
+    </div>
+  </header>
+
+  <main id="main">
+    <article class="article">
+      <div class="container">
+        <a class="article-back" href="/#blog">Voltar ao blog</a>
+
+        <div class="article-meta">
+          <span class="area">{{AREA}}</span>
+          <span class="dot" aria-hidden="true"></span>
+          <time datetime="{{AAAA-MM-DD}}">{{DATA_POR_EXTENSO}}</time>
+          <span class="dot" aria-hidden="true"></span>
+          <span class="read">{{X}} min de leitura</span>
+        </div>
+
+        <h1 class="article-title">{{TITULO}}</h1>
+        <p class="article-lead">{{LINHA_DE_ABERTURA_RESUMO}}</p>
+
+        <hr class="article-divider" />
+
+        <div class="article-body">
+          <!-- TEXTO DA IZA AQUI. Use <h2>, <h3>, <p>, <ul>, <ol>, <strong>, <blockquote>.
+               Sem em-dashes (use vírgula, ponto, dois-pontos ou parênteses).
+               Sem promessa de êxito (OAB). Termo técnico sempre com tradução. -->
+          <p>{{PARAGRAFO_1}}</p>
+          <h2>{{SUBTITULO}}</h2>
+          <p>{{PARAGRAFO}}</p>
+        </div>
+
+        <p class="article-note">Este conteúdo tem caráter informativo e não substitui uma orientação jurídica para o seu caso específico.</p>
+
+        <div class="article-cta">
+          <h2>Esse é o seu caso?</h2>
+          <p>Conte a sua situação. Devolvo clareza e um plano, no seu idioma, onde quer que você esteja.</p>
+          <a class="btn btn-gold btn-lg" href="https://wa.me/4915750995941" target="_blank" rel="noopener">Agendar consulta</a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand">
+            <img src="../assets/monogram.png" alt="" aria-hidden="true" />
+            <div>
+              <div class="fb-name">Iza Rossiter</div>
+              <div class="fb-sub">Advocacia &amp; Consultoria Jurídica</div>
+            </div>
+          </div>
+          <p class="footer-mission">Auxiliar pessoas e famílias a encontrarem soluções jurídicas seguras e humanizadas em questões de saúde e relações familiares internacionais, protegendo seus direitos com excelência técnica e acolhimento.</p>
+        </div>
+        <nav class="footer-meta" aria-label="Contato e links">
+          <a href="https://wa.me/4915750995941" target="_blank" rel="noopener">WhatsApp · +49 1575 0995941</a>
+          <a href="mailto:advocacia@izarossiter.com">advocacia@izarossiter.com</a>
+          <a href="https://instagram.com/izarossiter" target="_blank" rel="noopener">Instagram · @izarossiter</a>
+          <span>OAB/BA 35.679</span>
+          <span>Atendimento remoto · Brasil e exterior · PT/DE</span>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Iza Rossiter · Advocacia &amp; Consultoria Jurídica. Todos os direitos reservados.</span>
+        <span>Conteúdo de caráter meramente informativo.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js" defer></script>
+  <script src="../main.js" defer></script>
+</body>
+</html>
