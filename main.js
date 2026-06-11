@@ -70,7 +70,7 @@
         (tel ? "WhatsApp: " + tel + "\n" : "") +
         "Área: " + area + "\n\n" +
         msg + "\n";
-      var href = "mailto:izarossiter@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+      var href = "mailto:advocacia@izarossiter.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
 
       note.classList.add("ok");
       note.textContent = "Abrindo seu aplicativo de e-mail com a mensagem pronta para a Iza…";
