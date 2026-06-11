@@ -96,6 +96,11 @@ html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 html { overflow-x: clip; color-scheme: light; }
+/* Lenis smooth-scroll base */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
 a, button, .btn, summary, label, input, select, textarea { touch-action: manipulation; }
 section[id], [id] { scroll-margin-top: 96px; }
 body {
@@ -257,12 +262,10 @@ p { text-wrap: pretty; }
 .hero h1 em { font-style: italic; color: var(--gold-dark); }
 .hero-lead { margin-top: 1.6rem; font-size: var(--fs-lead); line-height: 1.6; color: var(--ink-soft); max-width: 33rem; }
 .hero-actions { margin-top: 2.4rem; display: flex; flex-wrap: wrap; gap: 0.9rem; }
-/* Faixa de credenciais — logo abaixo do hero (movida do hero por T3) */
-.trust-strip { background: var(--paper); border-bottom: 1px solid var(--line); }
-.trust-strip .container { padding-block: clamp(1.1rem, 0.8rem + 1vw, 1.6rem); }
-.trust-list { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem 2rem; }
-.trust-list li { font-size: var(--fs-small); color: var(--text-muted); display: flex; align-items: center; gap: 0.6rem; font-weight: 500; }
-.trust-list li:not(:first-child)::before { content: ""; width: 4px; height: 4px; border-radius: 50%; background: var(--gold-mid); flex: none; margin-left: -1.15rem; }
+/* Faixa de credenciais — dentro do hero (abaixo dos CTAs) */
+.hero-trust { margin-top: 2.6rem; padding-top: 1.5rem; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 0.6rem 1.5rem; }
+.hero-trust li { list-style: none; font-size: var(--fs-small); color: var(--text-muted); display: flex; align-items: center; gap: 0.55rem; }
+.hero-trust li::before { content:""; width: 5px; height: 5px; border-radius: 50%; background: var(--gold-dark); flex: none; }
 
 .hero-figure { position: relative; justify-self: center; }
 .hero-figure__frame { position: relative; width: min(100%, 430px); aspect-ratio: 4/5; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-card); }
@@ -420,8 +423,8 @@ p { text-wrap: pretty; }
    ========================================================================= */
 .valueprop { background: var(--paper); border-bottom: 1px solid var(--line); }
 .valueprop .container { padding-block: clamp(1.4rem, 1rem + 1.5vw, 2.2rem); }
-.valueprop-list { list-style: none; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem 1.6rem; }
-.valueprop-list li { display: flex; align-items: center; gap: 0.7rem; font-size: 0.95rem; font-weight: 500; color: var(--ink); }
+.valueprop-list { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.9rem clamp(1.5rem, 0.5rem + 3vw, 3.2rem); }
+.valueprop-list li { display: flex; align-items: center; gap: 0.6rem; font-size: 0.95rem; font-weight: 500; color: var(--ink); white-space: nowrap; }
 .vp-ico { width: 26px; height: 26px; flex: none; display: grid; place-items: center; border-radius: 50%; background: rgba(150,118,82,0.12); color: var(--gold-dark); }
 .vp-ico svg { width: 15px; height: 15px; }
 

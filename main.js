@@ -34,7 +34,28 @@
     });
   }
 
-  /* ---- Formulário de contato → compõe e-mail (sem backend) ---- */
+  /* ---- Smooth scroll (Lenis), respeitando prefers-reduced-motion ---- */
+  var lenis = null;
+  if (!prefersReduced && typeof window.Lenis === "function") {
+    lenis = new window.Lenis({ lerp: 0.1, smoothWheel: true });
+    var raf = function (t) { lenis.raf(t); requestAnimationFrame(raf); };
+    requestAnimationFrame(raf);
+  }
+  /* Âncoras internas: rolagem suave com offset do header (skip-link mantém foco nativo) */
+  Array.prototype.forEach.call(document.querySelectorAll('a[href^="#"]'), function (a) {
+    if (a.classList.contains("skip-link")) return;
+    a.addEventListener("click", function (e) {
+      var id = a.getAttribute("href");
+      if (!id || id.length < 2) return;
+      var target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      if (lenis) lenis.scrollTo(target, { offset: -88 });
+      else target.scrollIntoView({ behavior: prefersReduced ? "auto" : "smooth", block: "start" });
+    });
+  });
+
+  /* ---- Formulário de contato → envia direto para o e-mail (sem backend) ---- */
   var form = document.getElementById("contatoForm");
   if (form) {
     var note = document.getElementById("formNote");
@@ -65,18 +86,45 @@
 
       var area = form.area.value;
       var tel = form.telefone.value.trim();
-      var subject = "Contato pelo site: " + area;
-      var body =
-        "Nome: " + nome + "\n" +
-        "E-mail: " + email + "\n" +
-        (tel ? "WhatsApp: " + tel + "\n" : "") +
-        "Área: " + area + "\n\n" +
-        msg + "\n";
-      var href = "mailto:advocacia@izarossiter.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+      var submitBtn = form.querySelector('button[type="submit"]');
+      var btnLabel = submitBtn ? submitBtn.textContent : "";
 
-      note.classList.add("ok");
-      note.textContent = "Abrindo seu aplicativo de e-mail com a mensagem pronta para a Iza…";
-      window.location.href = href;
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Enviando…"; }
+      note.classList.remove("ok");
+      note.textContent = "Enviando sua mensagem…";
+
+      fetch("https://formsubmit.co/ajax/advocacia@izarossiter.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          Nome: nome,
+          "E-mail": email,
+          WhatsApp: tel || "(não informado)",
+          "Área": area,
+          Mensagem: msg,
+          _subject: "Contato pelo site: " + area,
+          _template: "table",
+          _captcha: "false"
+        })
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (d && (d.success === true || d.success === "true")) {
+            form.reset();
+            note.classList.add("ok");
+            note.textContent = "Mensagem enviada. A Iza responde assim que possível. Obrigado!";
+          } else {
+            throw new Error("falha");
+          }
+        })
+        .catch(function () {
+          note.classList.remove("ok");
+          note.innerHTML = 'Não consegui enviar agora. Tente novamente ou ' +
+            '<a class="ulink" href="https://wa.me/4915750995941" target="_blank" rel="noopener">fale pelo WhatsApp</a>.';
+        })
+        .finally(function () {
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = btnLabel; }
+        });
     });
   }
 
