@@ -121,7 +121,15 @@ h1, h2, h3, h4, p, li, dd, a, strong { overflow-wrap: break-word; }
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
+  /* Bodoni é Didone: fixar um optical size médio engrossa os hairlines
+     (o auto escolhe o corte "display" de contraste extremo, que some na tela). */
+  font-optical-sizing: none;
+  font-variation-settings: "opsz" 24, "wght" 700;
+  /* Emil: o antialiased global (body) afina os hairlines no macOS — manter os
+     títulos na suavização padrão do SO p/ não desfazer o ganho do opsz/peso. */
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
   line-height: 1.08;
   letter-spacing: -0.005em;
   color: var(--ink);
@@ -256,10 +264,10 @@ p { text-wrap: pretty; }
 .hero-copy { max-width: 38rem; }
 .hero-label { margin-bottom: 1.6rem; }
 .hero h1 {
-  font-size: var(--fs-display); font-weight: 600; letter-spacing: -0.01em; line-height: 1.1;
+  font-size: var(--fs-display); font-weight: 700; letter-spacing: -0.01em; line-height: 1.1;
   padding-bottom: 0.08em;
 }
-.hero h1 em { font-style: italic; color: var(--gold-dark); }
+.hero h1 em { font-style: italic; color: var(--gold-dark); font-variation-settings: "opsz" 28, "wght" 700; }
 .hero-lead { margin-top: 1.6rem; font-size: var(--fs-lead); line-height: 1.6; color: var(--ink-soft); max-width: 33rem; }
 .hero-actions { margin-top: 2.4rem; display: flex; flex-wrap: wrap; gap: 0.9rem; }
 /* Faixa de credenciais — dentro do hero (abaixo dos CTAs) */
@@ -319,7 +327,8 @@ p { text-wrap: pretty; }
 @media (min-width: 760px) { .manifesto blockquote { max-width: 30ch; } }
 .manifesto q { quotes: none; }
 .manifesto p.q {
-  font-family: var(--font-display); font-weight: 500; font-style: italic;
+  font-family: var(--font-display); font-weight: 600; font-style: italic;
+  font-optical-sizing: none; font-variation-settings: "opsz" 26, "wght" 600;
   font-size: clamp(1.7rem, 1rem + 3.4vw, 3.2rem); line-height: 1.22; letter-spacing: -0.01em;
   color: #f5efe4;
 }
