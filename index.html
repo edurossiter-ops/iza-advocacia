@@ -255,14 +255,15 @@
     </section>
 
     <!-- ===================== Blog ===================== -->
-    <section class="section section--white" id="blog" aria-labelledby="blog-title">
+    <section class="section section--white" id="blog" aria-labelledby="blog-title" data-blog-scope>
       <div class="container">
         <div class="section-head" data-reveal>
           <h2 id="blog-title">As dúvidas reais de quem vive entre países, em linguagem clara.</h2>
-          <p>Os artigos estão a caminho. Por enquanto, acompanho essas dúvidas de perto no Instagram, em <a class="ulink" href="https://instagram.com/izarossiter" target="_blank" rel="noopener">@izarossiter</a>.</p>
+          <p data-blog-when-empty>Os artigos estão a caminho. Por enquanto, acompanho essas dúvidas de perto no Instagram, em <a class="ulink" href="https://instagram.com/izarossiter" target="_blank" rel="noopener">@izarossiter</a>.</p>
+          <p data-blog-when-posts hidden>Os artigos mais recentes. Também acompanho essas dúvidas de perto no Instagram, em <a class="ulink" href="https://instagram.com/izarossiter" target="_blank" rel="noopener">@izarossiter</a>.</p>
         </div>
 
-        <ul class="blog-grid">
+        <ul class="blog-grid" data-blog-list data-src="blog/posts.json" data-base="blog/" data-limit="3">
           <li class="blog-card" data-reveal>
             <span class="blog-card__tag">Família internacional</span>
             <h3>Como casar com estrangeiro no Brasil?</h3>
@@ -395,6 +396,7 @@
   </footer>
 
   <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js" defer></script>
+  <script src="blog.js" defer></script>
   <script src="main.js" defer></script>
 </body>
 </html>
